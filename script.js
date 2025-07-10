@@ -1,5 +1,5 @@
-const API_KEY = 'YOUR_API_KEY_HERE'; // Replace with your real API key
-const PLAYLIST_ID = 'YOUR_PLAYLIST_ID_HERE'; // Replace with your real playlist
+const API_KEY = 'AIzaSyDlsqMzQBOW8rliC2BdpyBOV3Hs8_2bVDA'; // <-- Your real API key
+const PLAYLIST_ID = 'PLU8ezI8GYqs7w1_2JjJp5X6lQ2k6U6z1U'; // Example: Kid-friendly playlist (replace if you want)
 
 const guestBtn = document.getElementById('guest-btn');
 const profileBtn = document.getElementById('profile-btn');
@@ -8,13 +8,37 @@ const videoScreen = document.getElementById('video-screen');
 const videoContainer = document.getElementById('video-container');
 const backBtn = document.getElementById('back-btn');
 
+let loadingSpinner;
+
+function showLoading() {
+  if (!loadingSpinner) {
+    loadingSpinner = document.createElement('div');
+    loadingSpinner.className = 'loading-spinner';
+    loadingSpinner.innerHTML = '<div class="spinner"></div><p>Loading videos...</p>';
+    videoContainer.appendChild(loadingSpinner);
+  }
+}
+
+function hideLoading() {
+  if (loadingSpinner) {
+    loadingSpinner.remove();
+    loadingSpinner = null;
+  }
+}
+
 function fetchVideos() {
+  showLoading();
   const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${PLAYLIST_ID}&key=${API_KEY}`;
 
   fetch(url)
     .then(response => response.json())
     .then(data => {
+      hideLoading();
       videoContainer.innerHTML = '';
+      if (!data.items || data.items.length === 0) {
+        videoContainer.innerHTML = '<p>No videos found in this playlist.</p>';
+        return;
+      }
       data.items.forEach(item => {
         const videoId = item.snippet.resourceId.videoId;
         const title = item.snippet.title;
@@ -30,7 +54,8 @@ function fetchVideos() {
       });
     })
     .catch(err => {
-      videoContainer.innerHTML = `<p>Oops! Couldn't load videos. Check internet or try later.</p>`;
+      hideLoading();
+      videoContainer.innerHTML = `<p>Oops! Couldn't load videos. Check your internet or try again later.</p>`;
       console.error('YouTube API Error:', err);
     });
 }

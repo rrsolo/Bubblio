@@ -101,3 +101,44 @@ body {
   0% { transform: scale(0.8); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
+
+/* Loading Spinner */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #ff90b3;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive video screen */
+@media (max-width: 600px) {
+  .video-item {
+    max-width: 95vw;
+    margin: 10px auto;
+    display: block;
+  }
+  .back-btn {
+    position: static;
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+  }
+  iframe {
+    width: 100% !important;
+    height: 220px !important;
+  }
+}
