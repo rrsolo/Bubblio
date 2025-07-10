@@ -1,0 +1,103 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Baloo 2', sans-serif;
+  overflow-x: hidden;
+  background: #f0f9ff;
+  color: #333;
+  text-align: center;
+}
+
+.screen {
+  padding: 20px;
+}
+
+.title {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #ff73b5;
+  animation: bounceIn 1s ease;
+}
+
+.btn {
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  background-color: #ff90b3;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  margin: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(255, 144, 179, 0.4);
+}
+.back-btn {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: #ffd166;
+}
+
+.note {
+  margin-top: 30px;
+  background: #fff4fa;
+  padding: 15px;
+  border-radius: 15px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 10px rgba(255, 144, 179, 0.2);
+}
+
+.video-item {
+  display: inline-block;
+  margin: 15px;
+  max-width: 320px;
+}
+.video-item img {
+  width: 100%;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.video-item img:hover {
+  transform: scale(1.03);
+}
+.video-item p {
+  margin-top: 8px;
+  font-size: 1rem;
+}
+
+/* 🎈 Animated Bubbles */
+.bubble-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+.bubbles::before,
+.bubbles::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.2) 10%, transparent 11%);
+  background-size: 30px 30px;
+  animation: floatBubbles 25s linear infinite;
+}
+
+@keyframes floatBubbles {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100%); }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}

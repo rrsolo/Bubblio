@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bubblio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bubble-background">
+    <div class="bubbles"></div>
+  </div>
+
+  <div id="welcome-screen" class="screen">
+    <h1 class="title">Bubblio</h1>
+    <button id="guest-btn" class="btn">Guest Mode</button>
+    <button id="profile-btn" class="btn">Create Profile</button>
+    <div class="note">
+      <h3>📌 Note from Rishi:</h3>
+      <p>
+        Hey! This app was made just for my little brother to enjoy safe and fun videos.
+        It’s a personal project — not for public sharing or app stores. Please keep it private
+        and just enjoy the love behind it.<br />
+        <strong>Made with ❤️ by RishiRohith</strong>
+      </p>
+    </div>
+  </div>
+
+  <div id="video-screen" class="screen" style="display: none;">
+    <button id="back-btn" class="btn back-btn">⬅ Back</button>
+    <div id="video-container"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
