@@ -1,0 +1,59 @@
+/* Bubblio 2.0 Theme Styles */
+
+.theme-dino {
+  --accent: #4caf50;
+  background: linear-gradient(135deg, #e0ffe0 0%, #b2f7b2 100%);
+}
+.theme-dino .animated-bg {
+  background: url('assets/dino-bg.svg') repeat-x bottom/cover, linear-gradient(135deg, #e0ffe0 0%, #b2f7b2 100%);
+  animation: vinesway 8s infinite linear alternate;
+}
+@keyframes vinesway {
+  0% { background-position-x: 0; }
+  100% { background-position-x: 80px; }
+}
+
+.theme-ocean {
+  --accent: #2196f3;
+  background: linear-gradient(135deg, #e0f7fa 0%, #b3e5fc 100%);
+}
+.theme-ocean .animated-bg {
+  background: url('assets/ocean-bg.svg') repeat-x bottom/cover, linear-gradient(135deg, #e0f7fa 0%, #b3e5fc 100%);
+  animation: bubblesfloat 12s infinite linear alternate;
+}
+@keyframes bubblesfloat {
+  0% { background-position-y: 100%; }
+  100% { background-position-y: 0%; }
+}
+
+.theme-safari {
+  --accent: #ff9800;
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+}
+.theme-safari .animated-bg {
+  background: url('assets/safari-bg.svg') repeat-x bottom/cover, linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  animation: sunsway 10s infinite linear alternate;
+}
+@keyframes sunsway {
+  0% { background-position-x: 0; }
+  100% { background-position-x: 120px; }
+}
+
+.theme-flying {
+  --accent: #90caf9;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+}
+.theme-flying .animated-bg {
+  background: url('assets/flying-bg.svg') repeat-x top/cover, linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  animation: cloudsfloat 14s infinite linear alternate;
+}
+@keyframes cloudsfloat {
+  0% { background-position-x: 0; }
+  100% { background-position-x: 100px; }
+}
+
+/* Theme preview emoji icons (for JS to inject) */
+.theme-preview-btn[data-theme="dino"] { background: #b2f7b2; }
+.theme-preview-btn[data-theme="ocean"] { background: #b3e5fc; }
+.theme-preview-btn[data-theme="safari"] { background: #ffe0b2; }
+.theme-preview-btn[data-theme="flying"] { background: #bbdefb; }
