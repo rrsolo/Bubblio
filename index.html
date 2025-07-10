@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubblio 2.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="themes.css">
+</head>
+<body class="theme-dino">
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    
+    <!-- Settings Gear (Parent Access) -->
+    <div class="settings-gear" id="settings-gear" tabindex="0" aria-label="Settings">
+        ⚙️
+    </div>
+    
+    <!-- Settings Panel -->
+    <div id="settings-panel" class="settings-panel" aria-hidden="true">
+        <div class="settings-header">
+            <h2>Settings</h2>
+            <button id="close-settings" aria-label="Close Settings">✖</button>
+        </div>
+        <div class="settings-content">
+            <div class="setting-group">
+                <label>Choose Theme</label>
+                <div id="theme-previews" class="theme-previews">
+                    <!-- Theme buttons will be injected by JS -->
+                </div>
+            </div>
+            
+            <div class="setting-group">
+                <label for="nickname-input">Nickname</label>
+                <input type="text" id="nickname-input" maxlength="16" placeholder="e.g. DinoBoy">
+            </div>
+            
+            <div class="setting-group">
+                <label for="emoji-input">Favorite Emojis</label>
+                <input type="text" id="emoji-input" maxlength="6" placeholder="e.g. 🦖🦕">
+            </div>
+            
+            <div class="setting-group">
+                <label for="color-select">Accent Color</label>
+                <select id="color-select">
+                    <option value="pink">Pink</option>
+                    <option value="green">Green</option>
+                    <option value="blue">Blue</option>
+                    <option value="yellow">Yellow</option>
+                </select>
+            </div>
+            
+            <div class="setting-group">
+                <label for="sound-toggle">
+                    <input type="checkbox" id="sound-toggle">
+                    Disable Sounds
+                </label>
+            </div>
+            
+            <button id="reset-btn" class="btn reset-btn">Reset to Default</button>
+        </div>
+    </div>
+    
+    <!-- Welcome Screen -->
+    <div id="welcome-screen" class="screen">
+        <div class="nickname-display" id="nickname-display"></div>
+        <h1 class="title">Bubblio</h1>
+        <button id="start-btn" class="btn big-btn">Start Watching</button>
+        
+        <div class="note">
+            <h3>📌 Note from Rishi:</h3>
+            <p>
+                Hey! This app was made just for my little brother to enjoy safe and fun videos.<br>
+                It's a personal project — not for public sharing or app stores. Please keep it private and just enjoy the love behind it.<br>
+                <strong>Made with ❤️ by RishiRohith</strong>
+            </p>
+        </div>
+    </div>
+    
+    <!-- Video Screen -->
+    <div id="video-screen" class="screen" style="display: none;">
+        <button id="back-btn" class="btn back-btn">⬅ Back</button>
+        <div id="video-container"></div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
