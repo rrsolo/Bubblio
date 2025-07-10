@@ -1,4 +1,4 @@
-/* Bubblio 2.0 - Theme Styles */
+/* Bubblio 2.0 - Complete Theme Styles */
 
 /* Dinosaur Jungle Theme */
 .theme-dino {
@@ -7,19 +7,28 @@
     --accent-dark: #388e3c;
     --bg-primary: #e8f5e8;
     --bg-secondary: #c8e6c9;
+    --text-primary: #2e7d32;
+    --shadow-color: rgba(76, 175, 80, 0.2);
 }
 
 .theme-dino .animated-bg {
     background: 
         radial-gradient(circle at 20% 80%, rgba(76, 175, 80, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 80% 20%, rgba(129, 199, 132, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 60%, rgba(56, 142, 60, 0.05) 0%, transparent 50%),
         linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
     animation: dinoFloat 20s ease-in-out infinite;
 }
 
 @keyframes dinoFloat {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(1deg); }
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg);
+        background-position: 0% 0%, 100% 100%, 50% 50%;
+    }
+    50% { 
+        transform: translateY(-10px) rotate(1deg);
+        background-position: 10% 10%, 90% 90%, 60% 40%;
+    }
 }
 
 /* Ocean Adventure Theme */
@@ -29,19 +38,28 @@
     --accent-dark: #1976d2;
     --bg-primary: #e3f2fd;
     --bg-secondary: #bbdefb;
+    --text-primary: #1565c0;
+    --shadow-color: rgba(33, 150, 243, 0.2);
 }
 
 .theme-ocean .animated-bg {
     background: 
         radial-gradient(circle at 30% 70%, rgba(33, 150, 243, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 70% 30%, rgba(100, 181, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(25, 118, 210, 0.05) 0%, transparent 50%),
         linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
     animation: oceanWave 15s ease-in-out infinite;
 }
 
 @keyframes oceanWave {
-    0%, 100% { transform: translateX(0px); }
-    50% { transform: translateX(10px); }
+    0%, 100% { 
+        transform: translateX(0px);
+        background-position: 0% 0%, 100% 100%, 50% 50%;
+    }
+    50% { 
+        transform: translateX(10px);
+        background-position: 10% 10%, 90% 90%, 60% 40%;
+    }
 }
 
 /* Safari Desert Theme */
@@ -51,19 +69,28 @@
     --accent-dark: #f57c00;
     --bg-primary: #fff3e0;
     --bg-secondary: #ffe0b2;
+    --text-primary: #e65100;
+    --shadow-color: rgba(255, 152, 0, 0.2);
 }
 
 .theme-safari .animated-bg {
     background: 
         radial-gradient(circle at 25% 75%, rgba(255, 152, 0, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 75% 25%, rgba(255, 183, 77, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(245, 124, 0, 0.05) 0%, transparent 50%),
         linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
     animation: safariGlow 18s ease-in-out infinite;
 }
 
 @keyframes safariGlow {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.8; }
+    0%, 100% { 
+        opacity: 1;
+        background-position: 0% 0%, 100% 100%, 50% 50%;
+    }
+    50% { 
+        opacity: 0.8;
+        background-position: 10% 10%, 90% 90%, 60% 40%;
+    }
 }
 
 /* Flying Sky Theme */
@@ -73,74 +100,95 @@
     --accent-dark: #64b5f6;
     --bg-primary: #f3e5f5;
     --bg-secondary: #e1bee7;
+    --text-primary: #7b1fa2;
+    --shadow-color: rgba(144, 202, 249, 0.2);
 }
 
 .theme-flying .animated-bg {
     background: 
         radial-gradient(circle at 40% 60%, rgba(144, 202, 249, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 60% 40%, rgba(187, 222, 251, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(100, 181, 246, 0.05) 0%, transparent 50%),
         linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
     animation: flyingDrift 25s ease-in-out infinite;
 }
 
 @keyframes flyingDrift {
-    0%, 100% { transform: translateY(0px) scale(1); }
-    50% { transform: translateY(-5px) scale(1.02); }
+    0%, 100% { 
+        transform: translateY(0px) scale(1);
+        background-position: 0% 0%, 100% 100%, 50% 50%;
+    }
+    50% { 
+        transform: translateY(-5px) scale(1.02);
+        background-position: 10% 10%, 90% 90%, 60% 40%;
+    }
 }
 
 /* Theme Preview Colors */
 .theme-preview-btn[data-theme="dino"] {
     background: linear-gradient(135deg, #4caf50, #81c784);
     color: white;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
 }
 
 .theme-preview-btn[data-theme="ocean"] {
     background: linear-gradient(135deg, #2196f3, #64b5f6);
     color: white;
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
 }
 
 .theme-preview-btn[data-theme="safari"] {
     background: linear-gradient(135deg, #ff9800, #ffb74d);
     color: white;
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
 }
 
 .theme-preview-btn[data-theme="flying"] {
     background: linear-gradient(135deg, #90caf9, #bbdefb);
     color: white;
+    box-shadow: 0 4px 15px rgba(144, 202, 249, 0.3);
 }
 
-/* Accent Color Overrides */
+/* Theme-specific button colors */
 .theme-dino .btn {
     background: var(--accent, #4caf50);
+    box-shadow: 0 4px 15px var(--shadow-color);
 }
 
 .theme-ocean .btn {
     background: var(--accent, #2196f3);
+    box-shadow: 0 4px 15px var(--shadow-color);
 }
 
 .theme-safari .btn {
     background: var(--accent, #ff9800);
+    box-shadow: 0 4px 15px var(--shadow-color);
 }
 
 .theme-flying .btn {
     background: var(--accent, #90caf9);
+    box-shadow: 0 4px 15px var(--shadow-color);
 }
 
 /* Theme-specific title colors */
 .theme-dino .title {
     color: var(--accent, #4caf50);
+    text-shadow: 2px 2px 4px var(--shadow-color);
 }
 
 .theme-ocean .title {
     color: var(--accent, #2196f3);
+    text-shadow: 2px 2px 4px var(--shadow-color);
 }
 
 .theme-safari .title {
     color: var(--accent, #ff9800);
+    text-shadow: 2px 2px 4px var(--shadow-color);
 }
 
 .theme-flying .title {
     color: var(--accent, #90caf9);
+    text-shadow: 2px 2px 4px var(--shadow-color);
 }
 
 /* Theme-specific nickname colors */
@@ -209,4 +257,67 @@
 
 .theme-flying .spinner {
     border-top-color: var(--accent, #90caf9);
+}
+
+/* Theme-specific focus states */
+.theme-dino .btn:focus,
+.theme-dino .settings-gear:focus,
+.theme-dino .theme-preview-btn:focus {
+    outline-color: var(--accent, #4caf50);
+}
+
+.theme-ocean .btn:focus,
+.theme-ocean .settings-gear:focus,
+.theme-ocean .theme-preview-btn:focus {
+    outline-color: var(--accent, #2196f3);
+}
+
+.theme-safari .btn:focus,
+.theme-safari .settings-gear:focus,
+.theme-safari .theme-preview-btn:focus {
+    outline-color: var(--accent, #ff9800);
+}
+
+.theme-flying .btn:focus,
+.theme-flying .settings-gear:focus,
+.theme-flying .theme-preview-btn:focus {
+    outline-color: var(--accent, #90caf9);
+}
+
+/* Theme-specific input focus */
+.theme-dino input:focus,
+.theme-dino select:focus {
+    border-color: var(--accent, #4caf50);
+}
+
+.theme-ocean input:focus,
+.theme-ocean select:focus {
+    border-color: var(--accent, #2196f3);
+}
+
+.theme-safari input:focus,
+.theme-safari select:focus {
+    border-color: var(--accent, #ff9800);
+}
+
+.theme-flying input:focus,
+.theme-flying select:focus {
+    border-color: var(--accent, #90caf9);
+}
+
+/* Theme-specific video item hover effects */
+.theme-dino .video-item:hover {
+    box-shadow: 0 8px 30px var(--shadow-color);
+}
+
+.theme-ocean .video-item:hover {
+    box-shadow: 0 8px 30px var(--shadow-color);
+}
+
+.theme-safari .video-item:hover {
+    box-shadow: 0 8px 30px var(--shadow-color);
+}
+
+.theme-flying .video-item:hover {
+    box-shadow: 0 8px 30px var(--shadow-color);
 }

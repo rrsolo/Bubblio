@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bubblio 2.0</title>
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&display=swap" rel="stylesheet">
+    <title>Bubblio 2.0 - Safe & Fun Videos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="themes.css">
 </head>
@@ -33,12 +33,12 @@
             
             <div class="setting-group">
                 <label for="nickname-input">Nickname</label>
-                <input type="text" id="nickname-input" maxlength="16" placeholder="e.g. DinoBoy">
+                <input type="text" id="nickname-input" maxlength="16" placeholder="e.g. DinoKid">
             </div>
             
             <div class="setting-group">
                 <label for="emoji-input">Favorite Emojis</label>
-                <input type="text" id="emoji-input" maxlength="6" placeholder="e.g. 🦖🦕">
+                <input type="text" id="emoji-input" maxlength="6" placeholder="e.g.  💖 🧸">
             </div>
             
             <div class="setting-group">
@@ -48,6 +48,8 @@
                     <option value="green">Green</option>
                     <option value="blue">Blue</option>
                     <option value="yellow">Yellow</option>
+                    <option value="purple">Purple</option>
+                    <option value="orange">Orange</option>
                 </select>
             </div>
             
@@ -71,17 +73,27 @@
         <div class="note">
             <h3>📌 Note from Rishi:</h3>
             <p>
-                Hey! This app was made just for my little brother to enjoy safe and fun videos.<br>
-                It's a personal project — not for public sharing or app stores. Please keep it private and just enjoy the love behind it.<br>
-                <strong>Made with ❤️ by RishiRohith</strong>
+                This app was made just for my little brother to enjoy safe and fun videos.<br>
+                Please don't share it. Made with ❤️ by RishiRohith.
             </p>
         </div>
     </div>
     
-    <!-- Video Screen -->
-    <div id="video-screen" class="screen" style="display: none;">
+    <!-- Home Screen (Video Grid) -->
+    <div id="home-screen" class="screen" style="display: none;">
         <button id="back-btn" class="btn back-btn">⬅ Back</button>
-        <div id="video-container"></div>
+        <div id="video-grid" class="video-grid">
+            <!-- Videos will be loaded here -->
+        </div>
+    </div>
+    
+    <!-- Video Player Screen -->
+    <div id="video-player-screen" class="screen" style="display: none;">
+        <button id="back-to-grid" class="btn back-btn">⬅ Back to Videos</button>
+        <div id="video-player-container" class="video-player-container">
+            <!-- YouTube iframe will be loaded here -->
+        </div>
+        <button id="watch-another-btn" class="btn watch-another-btn">Watch Another!</button>
     </div>
     
     <script src="script.js"></script>

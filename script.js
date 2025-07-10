@@ -1,4 +1,4 @@
-// Bubblio 2.0 - Main JavaScript
+// Bubblio 2.0 - Complete JavaScript Implementation
 
 // Configuration
 const API_KEY = 'AIzaSyDlsqMzQBOW8rliC2BdpyBOV3Hs8_2bVDA';
@@ -15,9 +15,13 @@ const THEMES = [
 // DOM Elements
 const startBtn = document.getElementById('start-btn');
 const welcomeScreen = document.getElementById('welcome-screen');
-const videoScreen = document.getElementById('video-screen');
-const videoContainer = document.getElementById('video-container');
+const homeScreen = document.getElementById('home-screen');
+const videoPlayerScreen = document.getElementById('video-player-screen');
+const videoGrid = document.getElementById('video-grid');
+const videoPlayerContainer = document.getElementById('video-player-container');
 const backBtn = document.getElementById('back-btn');
+const backToGridBtn = document.getElementById('back-to-grid');
+const watchAnotherBtn = document.getElementById('watch-another-btn');
 const nicknameDisplay = document.getElementById('nickname-display');
 const settingsGear = document.getElementById('settings-gear');
 const settingsPanel = document.getElementById('settings-panel');
@@ -38,6 +42,9 @@ let settings = {
     sound: true
 };
 
+let videos = [];
+let currentVideoIndex = 0;
+
 // Parent Gate Variables
 let gearClicks = 0;
 let gearTimer = null;
@@ -49,6 +56,7 @@ function init() {
     applySettings();
     setupEventListeners();
     setupParentGate();
+    setupKeyboardNavigation();
 }
 
 // Settings Management
@@ -93,7 +101,9 @@ function getAccentColor(color) {
         pink: '#ff90b3',
         green: '#4caf50',
         blue: '#2196f3',
-        yellow: '#ffd600'
+        yellow: '#ffd600',
+        purple: '#9c27b0',
+        orange: '#ff9800'
     };
     return colors[color] || colors.pink;
 }
@@ -171,20 +181,44 @@ function closeSettings() {
     playSound('click');
 }
 
+// Screen Navigation
+function showScreen(screenId) {
+    // Hide all screens
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.style.display = 'none';
+    });
+    
+    // Show target screen
+    const targetScreen = document.getElementById(screenId);
+    if (targetScreen) {
+        targetScreen.style.display = 'flex';
+    }
+}
+
 // Event Listeners
 function setupEventListeners() {
     // Start watching
     startBtn.addEventListener('click', () => {
-        welcomeScreen.style.display = 'none';
-        videoScreen.style.display = 'block';
+        showScreen('home-screen');
         fetchVideos();
         playSound('click');
     });
     
-    // Back button
+    // Back button (from home to welcome)
     backBtn.addEventListener('click', () => {
-        videoScreen.style.display = 'none';
-        welcomeScreen.style.display = 'block';
+        showScreen('welcome-screen');
+        playSound('click');
+    });
+    
+    // Back to grid (from video player to home)
+    backToGridBtn.addEventListener('click', () => {
+        showScreen('home-screen');
+        playSound('click');
+    });
+    
+    // Watch another button
+    watchAnotherBtn.addEventListener('click', () => {
+        playRandomVideo();
         playSound('click');
     });
     
@@ -227,14 +261,31 @@ function setupEventListeners() {
         applySettings();
         playSound('bounce');
     });
-    
-    // Keyboard support
+}
+
+// Keyboard Navigation
+function setupKeyboardNavigation() {
     document.addEventListener('keydown', (e) => {
+        // Escape to close settings
         if (e.key === 'Escape' && settingsPanel.getAttribute('aria-hidden') === 'false') {
             closeSettings();
         }
-        if (e.key === 'Backspace' && videoScreen.style.display !== 'none') {
-            backBtn.click();
+        
+        // Backspace to go back
+        if (e.key === 'Backspace') {
+            if (videoPlayerScreen.style.display !== 'none') {
+                backToGridBtn.click();
+            } else if (homeScreen.style.display !== 'none') {
+                backBtn.click();
+            }
+        }
+        
+        // Enter to activate focused element
+        if (e.key === 'Enter') {
+            const focused = document.activeElement;
+            if (focused && focused.click) {
+                focused.click();
+            }
         }
     });
 }
@@ -243,27 +294,31 @@ function setupEventListeners() {
 function playSound(type) {
     if (!settings.sound) return;
     
-    // Create audio context for better compatibility
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    if (type === 'click') {
-        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-        oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
-    } else if (type === 'bounce') {
-        oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
-        oscillator.frequency.exponentialRampToValueAtTime(300, audioContext.currentTime + 0.2);
+    try {
+        // Create audio context for better compatibility
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        if (type === 'click') {
+            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
+        } else if (type === 'bounce') {
+            oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(300, audioContext.currentTime + 0.2);
+        }
+        
+        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.1);
+    } catch (error) {
+        console.log('Audio not supported');
     }
-    
-    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-    
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 0.1);
 }
 
 // YouTube API Integration
@@ -277,7 +332,7 @@ function showLoading() {
             <div class="spinner"></div>
             <p>Loading videos...</p>
         `;
-        videoContainer.appendChild(loadingSpinner);
+        videoGrid.appendChild(loadingSpinner);
     }
 }
 
@@ -291,7 +346,7 @@ function hideLoading() {
 function fetchVideos() {
     showLoading();
     
-    const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${PLAYLIST_ID}&key=${API_KEY}`;
+    const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId=${PLAYLIST_ID}&key=${API_KEY}`;
     
     fetch(url)
         .then(response => {
@@ -302,14 +357,16 @@ function fetchVideos() {
         })
         .then(data => {
             hideLoading();
-            videoContainer.innerHTML = '';
+            videoGrid.innerHTML = '';
             
             if (!data.items || data.items.length === 0) {
-                videoContainer.innerHTML = '<p style="text-align: center; font-size: 1.2rem; color: #666;">No videos found in this playlist.</p>';
+                videoGrid.innerHTML = '<div class="error-message">No videos found in this playlist.</div>';
                 return;
             }
             
-            data.items.forEach(item => {
+            videos = data.items;
+            
+            videos.forEach((item, index) => {
                 const videoId = item.snippet.resourceId.videoId;
                 const title = item.snippet.title;
                 const thumb = item.snippet.thumbnails.medium.url;
@@ -320,15 +377,15 @@ function fetchVideos() {
                     <img src="${thumb}" alt="${title}" loading="lazy">
                     <p>${title}</p>
                 `;
-                videoItem.addEventListener('click', () => playVideo(videoId));
-                videoContainer.appendChild(videoItem);
+                videoItem.addEventListener('click', () => playVideo(videoId, index));
+                videoGrid.appendChild(videoItem);
             });
         })
         .catch(error => {
             hideLoading();
             console.error('YouTube API Error:', error);
             
-            let errorMessage = 'Oops! Couldn\'t load videos. Try again later.';
+            let errorMessage = 'Oops! Videos couldn\'t load. Try again when you\'re online!';
             
             if (!navigator.onLine) {
                 errorMessage = 'Try again when you\'re back online!';
@@ -338,23 +395,33 @@ function fetchVideos() {
                 errorMessage = 'Playlist not found or private.';
             }
             
-            videoContainer.innerHTML = `<p style="text-align: center; font-size: 1.2rem; color: #666;">${errorMessage}</p>`;
+            videoGrid.innerHTML = `<div class="error-message">${errorMessage}</div>`;
         });
 }
 
-function playVideo(videoId) {
-    videoContainer.innerHTML = `
-        <div style="width: 100%; max-width: 800px; margin: 0 auto;">
-            <iframe 
-                width="100%" 
-                height="450" 
-                src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" 
-                frameborder="0" 
-                allowfullscreen>
-            </iframe>
-        </div>
+function playVideo(videoId, index = 0) {
+    currentVideoIndex = index;
+    
+    videoPlayerContainer.innerHTML = `
+        <iframe 
+            width="100%" 
+            height="500" 
+            src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1" 
+            frameborder="0" 
+            allowfullscreen>
+        </iframe>
     `;
+    
+    showScreen('video-player-screen');
     playSound('click');
+}
+
+function playRandomVideo() {
+    if (videos.length === 0) return;
+    
+    const randomIndex = Math.floor(Math.random() * videos.length);
+    const videoId = videos[randomIndex].snippet.resourceId.videoId;
+    playVideo(videoId, randomIndex);
 }
 
 // Initialize the app
