@@ -1,0 +1,9 @@
+THIS SHOULD BE A LINTER ERROR<svg width="800" height="120" viewBox="0 0 800 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="120" fill="#ffe0b2"/>
+  <circle cx="80" cy="40" r="24" fill="#ffd600"/>
+  <rect x="700" y="90" width="40" height="18" fill="#8d6e63"/>
+  <circle cx="710" cy="110" r="6" fill="#424242"/>
+  <circle cx="730" cy="110" r="6" fill="#424242"/>
+  <ellipse cx="400" cy="110" rx="18" ry="8" fill="#bdbdbd"/>
+  <rect x="390" y="100" width="8" height="10" fill="#bdbdbd"/>
+</svg>
